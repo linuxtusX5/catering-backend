@@ -1,4 +1,7 @@
-import { getMenuItems, createMenuItem } from "../controllers/menuController.js";
+import {
+  getMenuItems,
+  createMenuItem,
+} from "../controllers/menu.controller.js";
 import express from "express";
 const router = express.Router();
 
