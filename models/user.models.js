@@ -3,11 +3,15 @@ import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema(
   {
-    name: {
+    firstName: {
       type: String,
-      required: [true, "Name is required"],
+      required: [true, "First Name is required"],
       trim: true,
-      minlength: [2, "Name must be at least 2 characters long"],
+    },
+    lastName: {
+      type: String,
+      required: [true, "Last Name is required"],
+      trim: true,
     },
     email: {
       type: String,
@@ -20,6 +24,10 @@ const userSchema = new mongoose.Schema(
         "Please provide a valid email",
       ],
     },
+    phone: {
+      type: String,
+      trim: true,
+    },
     password: {
       type: String,
       required: [true, "Password is required"],
@@ -29,14 +37,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ["customer", "admin"],
       default: "customer",
-    },
-    phone: {
-      type: String,
-      trim: true,
-    },
-    address: {
-      type: String,
-      trim: true,
     },
     isActive: {
       type: Boolean,

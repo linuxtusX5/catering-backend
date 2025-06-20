@@ -16,14 +16,16 @@ const router = express.Router();
 router.post(
   "/register",
   [
-    body("name")
-      .trim()
-      .isLength({ min: 2 })
-      .withMessage("Name must be at least 2 characters"),
+    body("firstName").trim().notEmpty().withMessage("First Name is required"),
+    body("lastName").trim().notEmpty().withMessage("Last Name is required"),
     body("email")
       .isEmail()
       .normalizeEmail()
       .withMessage("Please provide a valid email"),
+    body("phone")
+      .optional()
+      .isMobilePhone()
+      .withMessage("Please provide a valid phone number"),
     body("password")
       .isLength({ min: 6 })
       .withMessage("Password must be at least 6 characters")
@@ -31,15 +33,6 @@ router.post(
       .withMessage(
         "Password must contain at least one uppercase letter, one lowercase letter, and one number"
       ),
-    body("phone")
-      .optional()
-      .isMobilePhone()
-      .withMessage("Please provide a valid phone number"),
-    body("address")
-      .optional()
-      .trim()
-      .isLength({ max: 500 })
-      .withMessage("Address must be less than 500 characters"),
   ],
   register
 );

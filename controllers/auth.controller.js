@@ -20,7 +20,7 @@ export const register = async (req, res) => {
       });
     }
 
-    const { name, email, password, phone, address } = req.body;
+    const { firstName, lastName, email, password, phone } = req.body;
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -34,11 +34,11 @@ export const register = async (req, res) => {
 
     // Create new user
     const user = new User({
-      name,
+      firstName,
+      lastName,
       email,
       password,
       phone,
-      address,
     });
 
     await user.save();
@@ -52,11 +52,11 @@ export const register = async (req, res) => {
       token,
       user: {
         id: user._id,
-        name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         role: user.role,
         phone: user.phone,
-        address: user.address,
       },
     });
   } catch (error) {
