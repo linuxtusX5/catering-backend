@@ -8,6 +8,7 @@ import DB from "./config/database.js";
 // import customerRoutes from "./routes/customer.routes.js";
 // import orderRoutes from "./routes/order.routes.js";
 import authRoutes from "./routes/auth.route.js";
+import menuRoutes from "./routes/menu.routes.js";
 
 dotenv.config();
 DB();
@@ -24,7 +25,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/v1/auth", authRoutes);
-// app.use("/api/menu", menuRoutes);
+app.use("/api/v1/menu", menuRoutes);
 // app.use("/api/customers", customerRoutes);
 // app.use("/api/orders", orderRoutes);
 
