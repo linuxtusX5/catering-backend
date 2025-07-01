@@ -98,8 +98,52 @@ export const getMenuItemById = async (req, res) => {
   }
 };
 
+// export const createMenuItem = async (req, res) => {
+//   try {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//       return res.status(400).json({
+//         success: false,
+//         error: "Validation failed",
+//         details: errors.array(),
+//       });
+//     }
+
+//     const itemData = {
+//       ...req.body,
+//       imageUrl: req.file ? `/uploads/${req.file.filename}` : undefined,
+//     };
+
+//     const item = new MenuItem(itemData);
+//     await item.save();
+
+//     res.status(201).json({
+//       success: true,
+//       message: "Menu item created successfully",
+//       item,
+//     });
+//   } catch (error) {
+//     console.error("Menu item creation error:", error);
+//     res.status(500).json({
+//       success: false,
+//       error: "Failed to create menu item",
+//     });
+//   }
+// };
+
 export const createMenuItem = async (req, res) => {
   try {
+    // 🔽 Try to parse fields if they come as JSON strings
+    if (typeof req.body.ingredients === "string") {
+      req.body.ingredients = JSON.parse(req.body.ingredients);
+    }
+    if (typeof req.body.allergens === "string") {
+      req.body.allergens = JSON.parse(req.body.allergens);
+    }
+    if (typeof req.body.nutritionalInfo === "string") {
+      req.body.nutritionalInfo = JSON.parse(req.body.nutritionalInfo);
+    }
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
