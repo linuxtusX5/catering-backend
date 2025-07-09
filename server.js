@@ -6,7 +6,7 @@ import DB from "./config/database.js";
 // Route imports
 // import menuRoutes from "./routes/menuroutes.js";
 // import customerRoutes from "./routes/customer.routes.js";
-// import orderRoutes from "./routes/order.routes.js";
+import orderRoutes from "./routes/order.routes.js";
 import authRoutes from "./routes/auth.route.js";
 import menuRoutes from "./routes/menu.routes.js";
 
@@ -28,7 +28,7 @@ app.use(express.json());
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/menu", menuRoutes);
 // app.use("/api/customers", customerRoutes);
-// app.use("/api/orders", orderRoutes);
+app.use("/api/v1/orders", orderRoutes);
 
 // Error middleware (optional cleaner)
 // app.use((err, req, res, next) => {
