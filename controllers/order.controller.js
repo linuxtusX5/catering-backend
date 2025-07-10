@@ -1,5 +1,5 @@
 import { validationResult } from "express-validator";
-import Order from "../models/Order.js";
+import Order from "../models/Order.models.js";
 
 export const getAllOrders = async (req, res) => {
   try {
