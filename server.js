@@ -2,10 +2,6 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import DB from "./config/database.js";
-
-// Route imports
-// import menuRoutes from "./routes/menuroutes.js";
-// import customerRoutes from "./routes/customer.routes.js";
 import orderRoutes from "./routes/order.routes.js";
 import authRoutes from "./routes/auth.route.js";
 import menuRoutes from "./routes/menu.routes.js";
@@ -22,19 +18,12 @@ app.use(
   })
 );
 app.use(express.json());
-// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/menu", menuRoutes);
 // app.use("/api/customers", customerRoutes);
 app.use("/api/v1/orders", orderRoutes);
-
-// Error middleware (optional cleaner)
-// app.use((err, req, res, next) => {
-//   console.error(err.stack);
-//   res.status(500).json({ message: err.message });
-// });
 
 const PORT = process.env.PORT || 5000;
 //Listen
