@@ -37,40 +37,6 @@ router.get("/categories", getMenuCategories);
 router.get("/:id", getMenuItemById);
 
 // Create new menu item (Admin only)
-// router.post(
-//   "/",
-//   authenticateToken,
-//   requireAdmin,
-//   upload.single("image"),
-//   [
-//     body("name").trim().notEmpty().withMessage("Name is required"),
-//     body("description")
-//       .trim()
-//       .notEmpty()
-//       .withMessage("Description is required"),
-//     body("price")
-//       .isFloat({ min: 0 })
-//       .withMessage("Price must be a positive number"),
-//     body("category").trim().notEmpty().withMessage("Category is required"),
-//     body("ingredients")
-//       .optional()
-//       .isArray()
-//       .withMessage("Ingredients must be an array"),
-//     body("allergens")
-//       .optional()
-//       .isArray()
-//       .withMessage("Allergens must be an array"),
-//     body("preparationTime")
-//       .optional()
-//       .isInt({ min: 1 })
-//       .withMessage("Preparation time must be a positive integer"),
-//     body("spiceLevel")
-//       .optional()
-//       .isIn(["Mild", "Medium", "Hot", "Extra Hot"])
-//       .withMessage("Invalid spice level"),
-//   ],
-//   createMenuItem
-// );
 
 router.post(
   "/",
