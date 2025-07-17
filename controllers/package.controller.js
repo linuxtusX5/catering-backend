@@ -20,3 +20,26 @@ export const getAllPackages = async (req, res) => {
     });
   }
 };
+export const getPackageById = async (req, res) => {
+  try {
+    const cateringPackage = await CateringPackage.findById(req.params.id);
+
+    if (!cateringPackage) {
+      return res.status(404).json({
+        success: false,
+        error: "Catering package not found",
+      });
+    }
+
+    res.json({
+      success: true,
+      package: cateringPackage,
+    });
+  } catch (error) {
+    console.error("Package fetch error:", error);
+    res.status(500).json({
+      success: false,
+      error: "Failed to fetch catering package",
+    });
+  }
+};
