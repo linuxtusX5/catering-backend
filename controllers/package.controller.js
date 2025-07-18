@@ -43,3 +43,36 @@ export const getPackageById = async (req, res) => {
     });
   }
 };
+
+export const createPackage = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        error: "Validation failed",
+        details: errors.array(),
+      });
+    }
+
+    const packageData = {
+      ...req.body,
+      imageUrl: req.file ? `/uploads/${req.file.filename}` : undefined,
+    };
+
+    const cateringPackage = new CateringPackage(packageData);
+    await cateringPackage.save();
+
+    res.status(201).json({
+      success: true,
+      message: "Catering package created successfully",
+      package: cateringPackage,
+    });
+  } catch (error) {
+    console.error("Package creation error:", error);
+    res.status(500).json({
+      success: false,
+      error: "Failed to create catering package",
+    });
+  }
+};
