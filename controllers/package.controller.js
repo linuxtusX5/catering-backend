@@ -76,3 +76,47 @@ export const createPackage = async (req, res) => {
     });
   }
 };
+
+export const updatePackage = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        error: "Validation failed",
+        details: errors.array(),
+      });
+    }
+
+    const updateData = { ...req.body };
+
+    if (req.file) {
+      updateData.imageUrl = `/uploads/${req.file.filename}`;
+    }
+
+    const cateringPackage = await CateringPackage.findByIdAndUpdate(
+      req.params.id,
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    if (!cateringPackage) {
+      return res.status(404).json({
+        success: false,
+        error: "Catering package not found",
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "Catering package updated successfully",
+      package: cateringPackage,
+    });
+  } catch (error) {
+    console.error("Package update error:", error);
+    res.status(500).json({
+      success: false,
+      error: "Failed to update catering package",
+    });
+  }
+};
