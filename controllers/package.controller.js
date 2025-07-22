@@ -20,6 +20,7 @@ export const getAllPackages = async (req, res) => {
     });
   }
 };
+
 export const getPackageById = async (req, res) => {
   try {
     const cateringPackage = await CateringPackage.findById(req.params.id);
@@ -117,6 +118,32 @@ export const updatePackage = async (req, res) => {
     res.status(500).json({
       success: false,
       error: "Failed to update catering package",
+    });
+  }
+};
+
+export const deletePackage = async (req, res) => {
+  try {
+    const cateringPackage = await CateringPackage.findByIdAndDelete(
+      req.params.id
+    );
+
+    if (!cateringPackage) {
+      return res.status(404).json({
+        success: false,
+        error: "Catering package not found",
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "Catering package deleted successfully",
+    });
+  } catch (error) {
+    console.error("Package deletion error:", error);
+    res.status(500).json({
+      success: false,
+      error: "Failed to delete catering package",
     });
   }
 };
